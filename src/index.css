@@ -1,3 +1,15 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.loginInput{
+  @apply block outline-none bg-transparent border border-white rounded-xl px-3 py-0.5 my-1.5 text-center
+}
+
+.btnClass {
+  @apply text-white bg-green-500 border-white border py-0.5 px-4 rounded-xl my-1.5 hover:border-green-300 hover:bg-transparent hover:text-green-300 
+}
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
