@@ -1,5 +1,7 @@
+import axios from "axios";
 import React, { useState } from "react";
 import { useNavigate } from "react-router";
+import { LOGIN_URL } from "../Utils";
 
 const Register = () => {
   const history = useNavigate();
@@ -40,7 +42,27 @@ const Register = () => {
             setUser({ ...user, password: e.target.value });
           }}
         />
-        <button className="btnClass">Submit</button>
+        <button
+          className="btnClass"
+          onClick={(e) => {
+            e.preventDefault();
+            axios
+              .post(`${LOGIN_URL}/sign-up`, user)
+              .then((res) => {
+                console.log(res.data);
+                if (res.data.length > 0) {
+                  alert(res.data);
+                } else {
+                  history("/");
+                }
+              })
+              .catch((err) => {
+                console.log(err);
+              });
+          }}
+        >
+          Submit
+        </button>
         <p
           className="underline cursor-pointer text-sm"
           onClick={(e) => {

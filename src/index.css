@@ -7,7 +7,11 @@
 }
 
 .btnClass {
-  @apply text-white bg-green-500 border-white border py-0.5 px-4 rounded-xl my-1.5 hover:border-green-300 hover:bg-transparent hover:text-green-300 
+  @apply text-white bg-green-500 border-white border px-3 rounded-xl my-1.5 hover:border-green-300 hover:bg-transparent hover:text-green-300 
+}
+
+.dangerButton{
+  @apply text-white bg-red-700 border-white border px-3 rounded-xl my-1.5 hover:border-red-300 hover:bg-transparent hover:text-red-300 
 }
 
 ::-webkit-scrollbar {

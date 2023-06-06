@@ -20,27 +20,28 @@ const customStyles = {
   },
 };
 
-const AddModal = ({ modalIsOpen, setIsOpen }) => {
+const ViewModal = ({ modalIsOpen, setIsOpen, data }) => {
   const context = useContext(Context);
   const [user, setUser] = useState({
-    name: "",
-    email: "",
-    address: "",
-    bankName: "",
-    accountNo: "",
-    bankBranch: "",
-    ifscCode: "",
-    basicPay: "",
-    incentive: "",
-    travelAllowance: "",
-    otherAllowance: "",
-    grossEarning: "",
-    tds: "",
-    penalties: "",
-    grossDeduction: "",
-    netPay: "",
-    payslips: "",
+    name: data?.name,
+    email: data?.email,
+    address: data?.address,
+    bankName: data?.bankName,
+    accountNo: data?.accountNo,
+    bankBranch: data?.bankBranch,
+    ifscCode: data?.ifscCode,
+    basicPay: data?.basicPay,
+    incentive: data?.incentive,
+    travelAllowance: data?.travelAllowance,
+    otherAllowance: data?.otherAllowance,
+    grossEarning: data?.grossEarning,
+    tds: data?.tds,
+    penalties: data?.penalties,
+    grossDeduction: data?.grossDeduction,
+    netPay: data?.netPay,
+    payslips: data?.payslips,
   });
+
   function closeModal() {
     setIsOpen(false);
   }
@@ -53,6 +54,23 @@ const AddModal = ({ modalIsOpen, setIsOpen }) => {
       >
         <div className="flex items-center justify-between">
           <h1 className="text-2xl font-semibold">Add New Employee</h1>
+          <button
+            className="dangerButton"
+            onClick={(e) => {
+              e.preventDefault();
+              axios
+                .delete(`${EDUCATORS_URL}/deleteEducator`, {
+                  data: { id: data?._id },
+                })
+                .then((res) => {
+                  console.log(res);
+                  closeModal();
+                  context.getEducators();
+                });
+            }}
+          >
+            Delete Educator
+          </button>
           <AiOutlineClose
             size={22}
             className="cursor-pointer font-semibold"
@@ -222,10 +240,16 @@ const AddModal = ({ modalIsOpen, setIsOpen }) => {
           onClick={(e) => {
             e.preventDefault();
             axios
-              .post(`${EDUCATORS_URL}/addEducator`, user)
+              .put(`${EDUCATORS_URL}/updateEducator`, {
+                id: data?._id,
+                ...user,
+              })
               .then((response) => {
-                console.log(response);
-                context.getEducatos();
+                if (response.data.modifiedCount) {
+                  context.getEducators();
+                } else {
+                  alert("Some error occured");
+                }
               })
               .catch((error) => {
                 console.log(error);
@@ -233,11 +257,11 @@ const AddModal = ({ modalIsOpen, setIsOpen }) => {
             closeModal();
           }}
         >
-          Add New
+          Update Data
         </button>
       </Modal>
     </div>
   );
 };
 
-export default AddModal;
+export default ViewModal;

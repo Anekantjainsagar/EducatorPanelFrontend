@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router";
+import axios from "axios";
+import { LOGIN_URL } from "../Utils/index";
 
 const Login = () => {
   const history = useNavigate();
@@ -30,7 +32,28 @@ const Login = () => {
             setUser({ ...user, password: e.target.value });
           }}
         />
-        <button className="btnClass">Submit</button>
+        <button
+          className="btnClass"
+          onClick={(e) => {
+            e.preventDefault();
+            axios
+              .post(`${LOGIN_URL}/sign-in`, user)
+              .then((res) => {
+                console.log(res);
+                if (res.data.length > 0) {
+                  alert(res.data);
+                } else {
+                  localStorage.setItem("token", res.data.jwtToken);
+                  history("/Home");
+                }
+              })
+              .catch((err) => {
+                console.log(err);
+              });
+          }}
+        >
+          Submit
+        </button>
         <p
           className="underline cursor-pointer text-sm"
           onClick={(e) => {
