@@ -26,7 +26,7 @@ const App = () => {
 
   console.log(location.pathname);
   useEffect(() => {
-    if (location.pathname !== "/Register" || location.pathname !== "/") {
+    if (location.pathname !== "/Register" && location.pathname !== "/") {
       checkToken();
     }
   }, [history]);
