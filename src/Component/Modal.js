@@ -23,23 +23,22 @@ const customStyles = {
 const AddModal = ({ modalIsOpen, setIsOpen }) => {
   const context = useContext(Context);
   const [user, setUser] = useState({
-    name: "",
-    email: "",
-    address: "",
-    bankName: "",
-    accountNo: "",
-    bankBranch: "",
-    ifscCode: "",
-    basicPay: "",
-    incentive: "",
-    travelAllowance: "",
-    otherAllowance: "",
-    grossEarning: "",
-    tds: "",
-    penalties: "",
-    grossDeduction: "",
-    netPay: "",
-    payslips: "",
+    name: undefined,
+    email: undefined,
+    address: undefined,
+    bankName: undefined,
+    accountNo: undefined,
+    bankBranch: undefined,
+    ifscCode: undefined,
+    basicPay: undefined,
+    incentive: undefined,
+    travelAllowance: undefined,
+    otherAllowance: undefined,
+    grossEarning: undefined,
+    tds: undefined,
+    penalties: undefined,
+    grossDeduction: undefined,
+    netPay: undefined,
   });
   function closeModal() {
     setIsOpen(false);
@@ -65,7 +64,7 @@ const AddModal = ({ modalIsOpen, setIsOpen }) => {
         <div className="grid grid-cols-3 mt-2">
           <input
             type="text"
-            placeholder="Enter name"
+            placeholder="Enter name *"
             value={user.name}
             onChange={(e) => {
               setUser({ ...user, name: e.target.value });
@@ -74,7 +73,7 @@ const AddModal = ({ modalIsOpen, setIsOpen }) => {
           />
           <input
             type="text"
-            placeholder="Enter email"
+            placeholder="Enter email *"
             value={user.email}
             onChange={(e) => {
               setUser({ ...user, email: e.target.value });
@@ -83,7 +82,7 @@ const AddModal = ({ modalIsOpen, setIsOpen }) => {
           />
           <input
             type="text"
-            placeholder="Enter address"
+            placeholder="Enter address *"
             value={user.address}
             onChange={(e) => {
               setUser({ ...user, address: e.target.value });
@@ -92,7 +91,7 @@ const AddModal = ({ modalIsOpen, setIsOpen }) => {
           />
           <input
             type="text"
-            placeholder="Enter Bank Name"
+            placeholder="Enter Bank Name *"
             value={user.bankName}
             onChange={(e) => {
               setUser({ ...user, bankName: e.target.value });
@@ -101,7 +100,7 @@ const AddModal = ({ modalIsOpen, setIsOpen }) => {
           />
           <input
             type="text"
-            placeholder="Enter Account No"
+            placeholder="Enter Account No *"
             value={user.accountNo}
             onChange={(e) => {
               setUser({ ...user, accountNo: e.target.value });
@@ -110,7 +109,7 @@ const AddModal = ({ modalIsOpen, setIsOpen }) => {
           />
           <input
             type="text"
-            placeholder="Enter Bank Branch"
+            placeholder="Enter Bank Branch *"
             value={user.bankBranch}
             onChange={(e) => {
               setUser({ ...user, bankBranch: e.target.value });
@@ -119,7 +118,7 @@ const AddModal = ({ modalIsOpen, setIsOpen }) => {
           />
           <input
             type="text"
-            placeholder="Enter IFSC Code"
+            placeholder="Enter IFSC Code *"
             value={user.ifscCode}
             onChange={(e) => {
               setUser({ ...user, ifscCode: e.target.value });
@@ -128,7 +127,7 @@ const AddModal = ({ modalIsOpen, setIsOpen }) => {
           />
           <input
             type="text"
-            placeholder="Enter Basic Pay"
+            placeholder="Enter Basic Pay *"
             value={user.basicPay}
             onChange={(e) => {
               setUser({ ...user, basicPay: e.target.value });
@@ -200,19 +199,10 @@ const AddModal = ({ modalIsOpen, setIsOpen }) => {
           />
           <input
             type="text"
-            placeholder="Enter Net Pay"
+            placeholder="Enter Net Pay *"
             value={user.netPay}
             onChange={(e) => {
               setUser({ ...user, netPay: e.target.value });
-            }}
-            className="loginInput w-11/12 m-auto"
-          />
-          <input
-            type="text"
-            placeholder="Enter Payslips"
-            value={user.payslips}
-            onChange={(e) => {
-              setUser({ ...user, payslips: e.target.value });
             }}
             className="loginInput w-11/12 m-auto"
           />
@@ -221,16 +211,50 @@ const AddModal = ({ modalIsOpen, setIsOpen }) => {
           className="btnClass m-auto block"
           onClick={(e) => {
             e.preventDefault();
-            axios
-              .post(`${EDUCATORS_URL}/addEducator`, user)
-              .then((response) => {
-                console.log(response);
-                context.getEducatos();
-              })
-              .catch((error) => {
-                console.log(error);
+            if (
+              user.name !== undefined &&
+              user.email !== undefined &&
+              user.address !== undefined &&
+              user.bankName !== undefined &&
+              user.bankBranch !== undefined &&
+              user.accountNo !== undefined &&
+              user.ifscCode !== undefined &&
+              user.basicPay !== undefined &&
+              user.netPay !== undefined
+            ) {
+              axios
+                .post(`${EDUCATORS_URL}/addEducator`, user)
+                .then((response) => {
+                  console.log(response);
+                  if (response) {
+                    context.getEducators();
+                  }
+                })
+                .catch((error) => {
+                  console.log(error);
+                });
+              setUser({
+                name: undefined,
+                email: undefined,
+                address: undefined,
+                bankName: undefined,
+                accountNo: undefined,
+                bankBranch: undefined,
+                ifscCode: undefined,
+                basicPay: undefined,
+                incentive: undefined,
+                travelAllowance: undefined,
+                otherAllowance: undefined,
+                grossEarning: undefined,
+                tds: undefined,
+                penalties: undefined,
+                grossDeduction: undefined,
+                netPay: undefined,
               });
-            closeModal();
+              closeModal();
+            } else {
+              alert("Fill all the required details");
+            }
           }}
         >
           Add New

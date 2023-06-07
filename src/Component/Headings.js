@@ -4,16 +4,17 @@ const Headings = () => {
   return (
     <div
       className="grid text-center py-1"
-      style={{ gridTemplateColumns: "6% 15% 20% 16% 13% 11% 11% 8%" }}
+      style={{ gridTemplateColumns: "5% 14% 20% 16% 11% 10% 8% 7% 8%" }}
     >
-      <p className="">S. No.</p>
-      <p className="">Name</p>
-      <p className="">Email</p>
-      <p className="">Bank Name</p>
-      <p className="">IFSC Code</p>
-      <p className="">Basic Pay</p>
-      <p className="">Incentive</p>
-      <p className="">Email Sent</p>
+      <p>S. No.</p>
+      <p>Name</p>
+      <p>Email</p>
+      <p>Bank Name</p>
+      <p>Account Number</p>
+      <p>IFSC Code</p>
+      <p>Basic Pay</p>
+      <p>Incentive</p>
+      <p>Net Pay</p>
     </div>
   );
 };

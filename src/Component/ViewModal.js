@@ -20,26 +20,27 @@ const customStyles = {
   },
 };
 
-const ViewModal = ({ modalIsOpen, setIsOpen, data }) => {
+const ViewModal = ({ modalIsOpen, setIsOpen }) => {
   const context = useContext(Context);
+
   const [user, setUser] = useState({
-    name: data?.name,
-    email: data?.email,
-    address: data?.address,
-    bankName: data?.bankName,
-    accountNo: data?.accountNo,
-    bankBranch: data?.bankBranch,
-    ifscCode: data?.ifscCode,
-    basicPay: data?.basicPay,
-    incentive: data?.incentive,
-    travelAllowance: data?.travelAllowance,
-    otherAllowance: data?.otherAllowance,
-    grossEarning: data?.grossEarning,
-    tds: data?.tds,
-    penalties: data?.penalties,
-    grossDeduction: data?.grossDeduction,
-    netPay: data?.netPay,
-    payslips: data?.payslips,
+    name: context?.clickedUser?.name,
+    email: context?.clickedUser?.email,
+    address: context?.clickedUser?.address,
+    bankName: context?.clickedUser?.bankName,
+    accountNo: context?.clickedUser?.accountNo,
+    bankBranch: context?.clickedUser?.bankBranch,
+    ifscCode: context?.clickedUser?.ifscCode,
+    basicPay: context?.clickedUser?.basicPay,
+    incentive: context?.clickedUser?.incentive,
+    travelAllowance: context?.clickedUser?.travelAllowance,
+    otherAllowance: context?.clickedUser?.otherAllowance,
+    grossEarning: context?.clickedUser?.grossEarning,
+    tds: context?.clickedUser?.tds,
+    penalties: context?.clickedUser?.penalties,
+    grossDeduction: context?.clickedUser?.grossDeduction,
+    netPay: context?.clickedUser?.netPay,
+    payslips: context?.clickedUser?.payslips,
   });
 
   function closeModal() {
@@ -53,14 +54,16 @@ const ViewModal = ({ modalIsOpen, setIsOpen, data }) => {
         style={customStyles}
       >
         <div className="flex items-center justify-between">
-          <h1 className="text-2xl font-semibold">Add New Employee</h1>
+          <h1 className="text-2xl font-semibold">
+            Update Employee - {context?.clickedUser?.name}
+          </h1>
           <button
             className="dangerButton"
             onClick={(e) => {
               e.preventDefault();
               axios
                 .delete(`${EDUCATORS_URL}/deleteEducator`, {
-                  data: { id: data?._id },
+                  data: { id: context?.clickedUser?._id },
                 })
                 .then((res) => {
                   console.log(res);
@@ -84,153 +87,192 @@ const ViewModal = ({ modalIsOpen, setIsOpen, data }) => {
           <input
             type="text"
             placeholder="Enter name"
-            value={user.name}
+            value={context?.clickedUser?.name}
             onChange={(e) => {
-              setUser({ ...user, name: e.target.value });
+              context.setClickedUser({
+                ...context?.clickedUser,
+                name: e.target.value,
+              });
             }}
             className="loginInput w-11/12 m-auto"
           />
           <input
             type="text"
             placeholder="Enter email"
-            value={user.email}
+            value={context?.clickedUser?.email}
             onChange={(e) => {
-              setUser({ ...user, email: e.target.value });
+              context.setClickedUser({
+                ...context?.clickedUser,
+                email: e.target.value,
+              });
             }}
             className="loginInput w-11/12 m-auto"
           />
           <input
             type="text"
             placeholder="Enter address"
-            value={user.address}
+            value={context?.clickedUser?.address}
             onChange={(e) => {
-              setUser({ ...user, address: e.target.value });
+              context.setClickedUser({
+                ...context?.clickedUser,
+                address: e.target.value,
+              });
             }}
             className="loginInput w-11/12 m-auto"
           />
           <input
             type="text"
             placeholder="Enter Bank Name"
-            value={user.bankName}
+            value={context?.clickedUser?.bankName}
             onChange={(e) => {
-              setUser({ ...user, bankName: e.target.value });
+              context.setClickedUser({
+                ...context?.clickedUser,
+                bankName: e.target.value,
+              });
             }}
             className="loginInput w-11/12 m-auto"
           />
           <input
             type="text"
             placeholder="Enter Account No"
-            value={user.accountNo}
+            value={context?.clickedUser?.accountNo}
             onChange={(e) => {
-              setUser({ ...user, accountNo: e.target.value });
+              context.setClickedUser({
+                ...context?.clickedUser,
+                accountNo: e.target.value,
+              });
             }}
             className="loginInput w-11/12 m-auto"
           />
           <input
             type="text"
             placeholder="Enter Bank Branch"
-            value={user.bankBranch}
+            value={context?.clickedUser?.bankBranch}
             onChange={(e) => {
-              setUser({ ...user, bankBranch: e.target.value });
+              context.setClickedUser({
+                ...context?.clickedUser,
+                bankBranch: e.target.value,
+              });
             }}
             className="loginInput w-11/12 m-auto"
           />
           <input
             type="text"
             placeholder="Enter IFSC Code"
-            value={user.ifscCode}
+            value={context?.clickedUser?.ifscCode}
             onChange={(e) => {
-              setUser({ ...user, ifscCode: e.target.value });
+              context.setClickedUser({
+                ...context?.clickedUser,
+                ifscCode: e.target.value,
+              });
             }}
             className="loginInput w-11/12 m-auto"
           />
           <input
             type="text"
             placeholder="Enter Basic Pay"
-            value={user.basicPay}
+            value={context?.clickedUser?.basicPay}
             onChange={(e) => {
-              setUser({ ...user, basicPay: e.target.value });
+              context.setClickedUser({
+                ...context?.clickedUser,
+                basicPay: e.target.value,
+              });
             }}
             className="loginInput w-11/12 m-auto"
           />
           <input
             type="text"
             placeholder="Enter Incentive"
-            value={user.incentive}
+            value={context?.clickedUser?.incentive}
             onChange={(e) => {
-              setUser({ ...user, incentive: e.target.value });
+              context.setClickedUser({
+                ...context?.clickedUser,
+                incentive: e.target.value,
+              });
             }}
             className="loginInput w-11/12 m-auto"
           />
           <input
             type="text"
             placeholder="Enter Travel Allowance"
-            value={user.travelAllowance}
+            value={context?.clickedUser?.travelAllowance}
             onChange={(e) => {
-              setUser({ ...user, travelAllowance: e.target.value });
+              context.setClickedUser({
+                ...context?.clickedUser,
+                travelAllowance: e.target.value,
+              });
             }}
             className="loginInput w-11/12 m-auto"
           />
           <input
             type="text"
             placeholder="Enter Other Allowance"
-            value={user.otherAllowance}
+            value={context?.clickedUser?.otherAllowance}
             onChange={(e) => {
-              setUser({ ...user, otherAllowance: e.target.value });
+              context.setClickedUser({
+                ...context?.clickedUser,
+                otherAllowance: e.target.value,
+              });
             }}
             className="loginInput w-11/12 m-auto"
           />
           <input
             type="text"
             placeholder="Enter Gross Earning"
-            value={user.grossEarning}
+            value={context?.clickedUser?.grossEarning}
             onChange={(e) => {
-              setUser({ ...user, grossEarning: e.target.value });
+              context.setClickedUser({
+                ...context?.clickedUser,
+                grossEarning: e.target.value,
+              });
             }}
             className="loginInput w-11/12 m-auto"
           />
           <input
             type="text"
             placeholder="Enter TDS"
-            value={user.tds}
+            value={context?.clickedUser?.tds}
             onChange={(e) => {
-              setUser({ ...user, tds: e.target.value });
+              context.setClickedUser({
+                ...context?.clickedUser,
+                tds: e.target.value,
+              });
             }}
             className="loginInput w-11/12 m-auto"
           />
           <input
             type="text"
             placeholder="Enter Penalties"
-            value={user.penalties}
+            value={context?.clickedUser?.penalties}
             onChange={(e) => {
-              setUser({ ...user, penalties: e.target.value });
+              context.setClickedUser({
+                ...context?.clickedUser,
+                penalties: e.target.value,
+              });
             }}
             className="loginInput w-11/12 m-auto"
           />
           <input
             type="text"
             placeholder="Enter Gross Deduction"
-            value={user.grossDeduction}
+            value={context?.clickedUser?.grossDeduction}
             onChange={(e) => {
-              setUser({ ...user, grossDeduction: e.target.value });
+              context.setClickedUser({
+                ...context?.clickedUser,
+                grossDeduction: e.target.value,
+              });
             }}
             className="loginInput w-11/12 m-auto"
           />
           <input
             type="text"
             placeholder="Enter Net Pay"
-            value={user.netPay}
+            value={context?.clickedUser?.netPay}
             onChange={(e) => {
-              setUser({ ...user, netPay: e.target.value });
-            }}
-            className="loginInput w-11/12 m-auto"
-          />
-          <input
-            type="text"
-            placeholder="Enter Payslips"
-            value={user.payslips}
-            onChange={(e) => {
-              setUser({ ...user, payslips: e.target.value });
+              context.setClickedUser({
+                ...context?.clickedUser,
+                netPay: e.target.value,
+              });
             }}
             className="loginInput w-11/12 m-auto"
           />
@@ -241,8 +283,8 @@ const ViewModal = ({ modalIsOpen, setIsOpen, data }) => {
             e.preventDefault();
             axios
               .put(`${EDUCATORS_URL}/updateEducator`, {
-                id: data?._id,
-                ...user,
+                id: context?.clickedUser?._id,
+                ...context?.clickedUser,
               })
               .then((response) => {
                 if (response.data.modifiedCount) {

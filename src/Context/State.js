@@ -5,6 +5,7 @@ import { EDUCATORS_URL } from "../Utils";
 
 const B2BState = (props) => {
   const [user, setUser] = useState();
+  const [clickedUser, setClickedUser] = useState();
   const [educators, setEducators] = useState([]);
   const [allEducatos, setAllEducatos] = useState([]);
   const [page, setPage] = useState(1);
@@ -59,6 +60,8 @@ const B2BState = (props) => {
         page,
         setPage,
         totalEducators,
+        clickedUser,
+        setClickedUser,
       }}
     >
       {props.children}
