@@ -39,7 +39,6 @@ const Login = () => {
             axios
               .post(`${LOGIN_URL}/sign-in`, user)
               .then((res) => {
-                console.log(res);
                 if (res.data.length > 0) {
                   alert(res.data);
                 } else {

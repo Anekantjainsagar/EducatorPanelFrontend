@@ -31,6 +31,14 @@ const Nav = ({ checkToken }) => {
             className="btnClass mx-2"
             onClick={(e) => {
               e.preventDefault();
+              axios
+                .get(`${EDUCATORS_URL}/sendMail`)
+                .then((res) => {
+                  alert(res.data);
+                })
+                .catch((err) => {
+                  console.log(err);
+                });
             }}
           >
             Send Payslips
