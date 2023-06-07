@@ -1,5 +1,5 @@
 import React, { useContext, useEffect } from "react";
-import { Route, Routes, useNavigate } from "react-router";
+import { Route, Routes, useLocation, useNavigate } from "react-router";
 
 import Home from "./Screen/Home";
 import Login from "./Screen/Login";
@@ -11,6 +11,7 @@ import Context from "./Context/Context";
 const App = () => {
   const history = useNavigate();
   const context = useContext(Context);
+  const location = useLocation();
 
   const checkToken = () => {
     const token = localStorage.getItem("token");
@@ -23,8 +24,11 @@ const App = () => {
     }
   };
 
+  console.log(location.pathname);
   useEffect(() => {
-    checkToken();
+    if (location.pathname !== "/Register" || location.pathname !== "/") {
+      checkToken();
+    }
   }, [history]);
 
   return (
