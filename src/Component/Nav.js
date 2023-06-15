@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import AddModal from "./Modal";
 import Context from "../Context/Context";
 import { CSVLink } from "react-csv";
@@ -11,6 +11,22 @@ const Nav = ({ checkToken }) => {
   const context = useContext(Context);
   const [modalIsOpen, setIsOpen] = useState(false);
   const [file, setFile] = useState();
+  const [allEducators, setAllEducators] = useState([]);
+
+  const getAllEducators = () => {
+    axios
+      .get(`${EDUCATORS_URL}/getAllEducators`)
+      .then((response) => {
+        setAllEducators(response.data.educators);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  useEffect(() => {
+    getAllEducators();
+  }, []);
 
   return (
     <>
@@ -30,11 +46,12 @@ const Nav = ({ checkToken }) => {
           <button
             className="btnClass mx-2"
             onClick={(e) => {
+              getAllEducators();
               e.preventDefault();
               axios
                 .get(`${EDUCATORS_URL}/sendMail`)
                 .then((res) => {
-                  alert(res.data);
+                  console.log(res);
                 })
                 .catch((err) => {
                   console.log(err);
@@ -105,7 +122,7 @@ const Nav = ({ checkToken }) => {
           )}
           <CSVLink
             className="btnClass mx-2"
-            data={context?.allEducatos}
+            data={allEducators}
             filename="Educators Data"
           >
             Export

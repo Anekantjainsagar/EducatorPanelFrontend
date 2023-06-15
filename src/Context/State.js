@@ -7,7 +7,6 @@ const B2BState = (props) => {
   const [user, setUser] = useState();
   const [clickedUser, setClickedUser] = useState();
   const [educators, setEducators] = useState([]);
-  const [allEducatos, setAllEducatos] = useState([]);
   const [page, setPage] = useState(1);
   const [totalEducators, setTotalEducators] = useState(0);
   const [search, setSearch] = useState("");
@@ -28,21 +27,6 @@ const B2BState = (props) => {
       });
   };
 
-  const getAllEducators = () => {
-    axios
-      .get(`${EDUCATORS_URL}/getAllEducators`)
-      .then((response) => {
-        setAllEducatos(response.data.educators);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
-
-  useEffect(() => {
-    getAllEducators();
-  }, []);
-
   useEffect(() => {
     getEducators();
   }, [page, search]);
@@ -56,7 +40,6 @@ const B2BState = (props) => {
         getEducators,
         search,
         setSearch,
-        allEducatos,
         page,
         setPage,
         totalEducators,
