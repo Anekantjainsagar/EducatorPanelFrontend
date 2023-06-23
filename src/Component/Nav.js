@@ -52,6 +52,7 @@ const Nav = ({ checkToken }) => {
                 .get(`${EDUCATORS_URL}/sendMail`)
                 .then((res) => {
                   console.log(res);
+                  alert("Done");
                 })
                 .catch((err) => {
                   console.log(err);
