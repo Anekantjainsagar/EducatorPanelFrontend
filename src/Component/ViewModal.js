@@ -35,11 +35,8 @@ const ViewModal = ({ modalIsOpen, setIsOpen }) => {
     incentive: context?.clickedUser?.incentive,
     travelAllowance: context?.clickedUser?.travelAllowance,
     otherAllowance: context?.clickedUser?.otherAllowance,
-    grossEarning: context?.clickedUser?.grossEarning,
     tds: context?.clickedUser?.tds,
     penalties: context?.clickedUser?.penalties,
-    grossDeduction: context?.clickedUser?.grossDeduction,
-    netPay: context?.clickedUser?.netPay,
     payslips: context?.clickedUser?.payslips,
   });
 
@@ -218,18 +215,6 @@ const ViewModal = ({ modalIsOpen, setIsOpen }) => {
           />
           <input
             type="text"
-            placeholder="Enter Gross Earning"
-            value={context?.clickedUser?.grossEarning}
-            onChange={(e) => {
-              context.setClickedUser({
-                ...context?.clickedUser,
-                grossEarning: e.target.value,
-              });
-            }}
-            className="loginInput w-11/12 m-auto"
-          />
-          <input
-            type="text"
             placeholder="Enter TDS"
             value={context?.clickedUser?.tds}
             onChange={(e) => {
@@ -248,30 +233,6 @@ const ViewModal = ({ modalIsOpen, setIsOpen }) => {
               context.setClickedUser({
                 ...context?.clickedUser,
                 penalties: e.target.value,
-              });
-            }}
-            className="loginInput w-11/12 m-auto"
-          />
-          <input
-            type="text"
-            placeholder="Enter Gross Deduction"
-            value={context?.clickedUser?.grossDeduction}
-            onChange={(e) => {
-              context.setClickedUser({
-                ...context?.clickedUser,
-                grossDeduction: e.target.value,
-              });
-            }}
-            className="loginInput w-11/12 m-auto"
-          />
-          <input
-            type="text"
-            placeholder="Enter Net Pay"
-            value={context?.clickedUser?.netPay}
-            onChange={(e) => {
-              context.setClickedUser({
-                ...context?.clickedUser,
-                netPay: e.target.value,
               });
             }}
             className="loginInput w-11/12 m-auto"
