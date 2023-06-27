@@ -6,6 +6,7 @@ import Context from "../Context/Context";
 
 const Home = ({ checkToken }) => {
   const context = useContext(Context);
+
   return (
     <div className="h-[100vh] w-[100vw] bg-black text-white">
       <Nav checkToken={checkToken} />

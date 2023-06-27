@@ -34,11 +34,8 @@ const AddModal = ({ modalIsOpen, setIsOpen }) => {
     incentive: undefined,
     travelAllowance: undefined,
     otherAllowance: undefined,
-    grossEarning: undefined,
     tds: undefined,
     penalties: undefined,
-    grossDeduction: undefined,
-    netPay: undefined,
   });
   function closeModal() {
     setIsOpen(false);
@@ -163,15 +160,6 @@ const AddModal = ({ modalIsOpen, setIsOpen }) => {
           />
           <input
             type="text"
-            placeholder="Enter Gross Earning"
-            value={user.grossEarning}
-            onChange={(e) => {
-              setUser({ ...user, grossEarning: e.target.value });
-            }}
-            className="loginInput w-11/12 m-auto"
-          />
-          <input
-            type="text"
             placeholder="Enter TDS"
             value={user.tds}
             onChange={(e) => {
@@ -188,24 +176,6 @@ const AddModal = ({ modalIsOpen, setIsOpen }) => {
             }}
             className="loginInput w-11/12 m-auto"
           />
-          <input
-            type="text"
-            placeholder="Enter Gross Deduction"
-            value={user.grossDeduction}
-            onChange={(e) => {
-              setUser({ ...user, grossDeduction: e.target.value });
-            }}
-            className="loginInput w-11/12 m-auto"
-          />
-          <input
-            type="text"
-            placeholder="Enter Net Pay *"
-            value={user.netPay}
-            onChange={(e) => {
-              setUser({ ...user, netPay: e.target.value });
-            }}
-            className="loginInput w-11/12 m-auto"
-          />
         </div>
         <button
           className="btnClass m-auto block"
@@ -219,8 +189,7 @@ const AddModal = ({ modalIsOpen, setIsOpen }) => {
               user.bankBranch !== undefined &&
               user.accountNo !== undefined &&
               user.ifscCode !== undefined &&
-              user.basicPay !== undefined &&
-              user.netPay !== undefined
+              user.basicPay !== undefined
             ) {
               axios
                 .post(`${EDUCATORS_URL}/addEducator`, user)
@@ -245,11 +214,8 @@ const AddModal = ({ modalIsOpen, setIsOpen }) => {
                 incentive: undefined,
                 travelAllowance: undefined,
                 otherAllowance: undefined,
-                grossEarning: undefined,
                 tds: undefined,
                 penalties: undefined,
-                grossDeduction: undefined,
-                netPay: undefined,
               });
               closeModal();
             } else {
