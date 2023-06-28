@@ -4,8 +4,9 @@ const Headings = () => {
   return (
     <div
       className="grid text-center py-1"
-      style={{ gridTemplateColumns: "5% 14% 20% 16% 11% 10% 8% 7% 8%" }}
+      style={{ gridTemplateColumns: "4% 5% 14% 16% 16% 11% 10% 8% 7% 8%" }}
     >
+      <p></p>
       <p>S. No.</p>
       <p>Name</p>
       <p>Email</p>

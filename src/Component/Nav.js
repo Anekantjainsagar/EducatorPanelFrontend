@@ -46,10 +46,11 @@ const Nav = ({ checkToken }) => {
           <button
             className="btnClass mx-2"
             onClick={(e) => {
-              getAllEducators();
               e.preventDefault();
               axios
-                .get(`${EDUCATORS_URL}/sendMail`)
+                .post(`${EDUCATORS_URL}/sendMail`, {
+                  emailUser: JSON.stringify(context.emailUser),
+                })
                 .then((res) => {
                   console.log(res);
                   alert("Done");

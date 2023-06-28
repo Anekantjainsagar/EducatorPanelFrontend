@@ -10,6 +10,7 @@ const B2BState = (props) => {
   const [page, setPage] = useState(1);
   const [totalEducators, setTotalEducators] = useState(0);
   const [search, setSearch] = useState("");
+  const [emailUser, setEmailUser] = useState([]);
 
   const getEducators = () => {
     axios
@@ -31,6 +32,7 @@ const B2BState = (props) => {
     getEducators();
   }, [page, search]);
 
+  console.log(emailUser);
   return (
     <Context.Provider
       value={{
@@ -45,6 +47,8 @@ const B2BState = (props) => {
         totalEducators,
         clickedUser,
         setClickedUser,
+        setEmailUser,
+        emailUser,
       }}
     >
       {props.children}
