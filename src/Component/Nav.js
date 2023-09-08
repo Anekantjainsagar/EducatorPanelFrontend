@@ -34,6 +34,25 @@ const Nav = ({ checkToken }) => {
       <div className="w-[100vw] flex items-center justify-between py-1.5 px-2">
         <h1 className="text-2xl font-bold">Educator Panel</h1>
         <div className="flex items-center">
+          <button
+            className="btnClass mx-2"
+            onClick={(e) => {
+              e.preventDefault();
+              axios
+                .put(`${EDUCATORS_URL}/deleteEducator`, {
+                  emailUser: JSON.stringify(context.emailUser),
+                })
+                .then((res) => {
+                  getAllEducators();
+                  alert("Done");
+                })
+                .catch((err) => {
+                  console.log(err);
+                });
+            }}
+          >
+            Delete
+          </button>
           <input
             type="text"
             className="loginInput mr-2"
@@ -129,7 +148,7 @@ const Nav = ({ checkToken }) => {
           >
             Export
           </CSVLink>
-          <buttonc
+          <button
             className="btnClass mx-2"
             onClick={(e) => {
               e.preventDefault();
@@ -138,7 +157,7 @@ const Nav = ({ checkToken }) => {
             }}
           >
             Logout
-          </buttonc>
+          </button>
         </div>
       </div>
     </>
