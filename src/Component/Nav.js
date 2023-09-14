@@ -43,8 +43,9 @@ const Nav = ({ checkToken }) => {
                   emailUser: JSON.stringify(context.emailUser),
                 })
                 .then((res) => {
-                  getAllEducators();
-                  alert("Done");
+                  setTimeout(() => {
+                    context.getEducators();
+                  }, 500);
                 })
                 .catch((err) => {
                   console.log(err);

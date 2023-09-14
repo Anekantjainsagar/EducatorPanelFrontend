@@ -27,6 +27,7 @@ const User = ({ index, data }) => {
                 let arr = context.emailUser;
                 arr.splice(arr.indexOf(data._id), 1);
                 context.setEmailUser([...arr]);
+                context.setSelectedAll(false);
               } else {
                 context.setEmailUser([...context.emailUser, data._id]);
               }
